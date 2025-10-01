@@ -32,6 +32,28 @@ public class Questions {
 
     // Deletes a question from the list
     public void deleteQuestion(Question q) {
+    	
+    	// protect against trying to delete question with null value
+    	
+    	if (q == null) {
+    		System.out.println("***ERROR***: Cannot delete null question");
+    		return;
+    	}
+    	
+    	// use helper method to verify question has no children
+    	
+    	if(!getDerivedQuestions(q).isEmpty()) {
+    		System.out.println("***ERROR***: Cannot delete parent question because derived questions exist: \n" + getDerivedQuestions(q).size());
+    		return;
+    	}
+    	
+    	// remove question and print success/failure message
+    	if (questions.remove(q)) {
+    		System.out.println("Question deleted succesfully: " + q.getQuestion());
+    	} else {
+    		System.out.println("***ERROR***: Question not found.");
+    	}
+    	
         questions.remove(q);
     }
 

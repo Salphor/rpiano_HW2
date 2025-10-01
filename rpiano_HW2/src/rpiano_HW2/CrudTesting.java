@@ -59,7 +59,7 @@ public class CrudTesting {
 
     // Create valid and invalid questions; store only valid ones. 
     public static void createQuestionTestCase() {
-        System.out.println("Testing createQuestionTestCase...");
+        System.out.println("____Testing createQuestionTestCase____");
 
         Question q1 = new Question("Is this a valid question?");
         Question q2 = new Question("What am I supposed to do?");
@@ -78,7 +78,7 @@ public class CrudTesting {
 
     // Demonstrate creating a derived question and listing all children of a parent
     public static void deriveQuestionFlowTestCase() {
-        System.out.println("Testing deriveQuestionFlowTestCase...");
+        System.out.println("____Testing deriveQuestionFlowTestCase____ ");
 
         Question parent = questions.getQuestions().get(0);
         Question child1 = questions.deriveQuestion(parent, "Refined: can you show an example?");
@@ -98,7 +98,7 @@ public class CrudTesting {
 
     // Create valid/invalid answers; invalid is rejected. 
     public static void createAnswerTestCase() {
-        System.out.println("Testing createAnswerTestCase...");
+        System.out.println("____Testing createAnswerTestCase____ ");
 
         Question firstQuestion = questions.getQuestions().get(0);
 
@@ -118,7 +118,7 @@ public class CrudTesting {
 
     // Mark a single answer correct and switch it to another; verify uniqueness
     public static void markCorrectViaQuestionTestCase() {
-        System.out.println("Testing markCorrectViaQuestionTestCase...");
+        System.out.println("____Testing markCorrectViaQuestionTestCase____ ");
         Question q = questions.getQuestions().get(0);
 
         Answer a1 = q.getAnswers().getAnswers().get(0);
@@ -136,7 +136,7 @@ public class CrudTesting {
 
     // Retrieve the correct answer
     public static void getCorrectAnswerTestCase() {
-        System.out.println("Testing getCorrectAnswerTestCase...");
+        System.out.println("____Testing getCorrectAnswerTestCase____ ");
 
         Question firstQuestion = questions.getQuestions().get(0);
         Answer correct = firstQuestion.getAnswers().getCorrectAnswer();
@@ -150,7 +150,7 @@ public class CrudTesting {
 
     // Show unread count and how it changes after reading an answer
     public static void getUnreadCountTestCase() {
-        System.out.println("Testing getUnreadCountTestCase...");
+        System.out.println("____Testing getUnreadCountTestCase____ ");
 
         Question firstQuestion = questions.getQuestions().get(0);
 
@@ -182,7 +182,7 @@ public class CrudTesting {
 
     // Filters for resolved vs unresolved questions.
     public static void resolvedFiltersTestCase() {
-        System.out.println("Testing resolved/unresolved filters...");
+        System.out.println("____Testing resolved/unresolved filters____ ");
         System.out.println("Resolved questions:");
         for (Question q : questions.getResolvedQuestions()) System.out.println(" - " + q.getQuestion());
         System.out.println("Unresolved questions:");
@@ -191,7 +191,7 @@ public class CrudTesting {
 
     // Keyword search demonstration.
     public static void findRelatedQuestionsTestCase() {
-        System.out.println("Testing findRelatedQuestionsTestCase...");
+        System.out.println("____Testing findRelatedQuestionsTestCase____ ");
 
         String keyword = "what";
         System.out.println("Searching for questions containing '" + keyword + "'...");
@@ -202,7 +202,7 @@ public class CrudTesting {
     
     // Test updating a question with valid and invalid text. 
     public static void updateQuestionTestCase() {
-        System.out.println("Testing updateQuestionTestCase...");
+        System.out.println("____Testing updateQuestionTestCase____ ");
 
         // Grab the first stored question
         Question q = questions.getQuestions().get(0);
@@ -226,7 +226,7 @@ public class CrudTesting {
 
     // Delete an answer and show the remaining ones. 
     public static void deleteAnswerTestCase() {
-        System.out.println("Testing deleteAnswerTestCase...");
+        System.out.println("____Testing deleteAnswerTestCase____ ");
 
         Question firstQuestion = questions.getQuestions().get(0);
         if (firstQuestion.getAnswers().getAnswers().size() > 1) {
@@ -242,7 +242,7 @@ public class CrudTesting {
 
     // Delete a question and show remaining ones. 
     public static void deleteQuestionTestCase() {
-        System.out.println("Testing deleteQuestionTestCase...");
+        System.out.println("____Testing deleteQuestionTestCase____ ");
 
         if (questions.getQuestions().size() > 1) {
             Question toDelete = questions.getQuestions().get(1);
@@ -253,11 +253,41 @@ public class CrudTesting {
         for (Question q : questions.getQuestions()) {
             System.out.println(" - " + q.getQuestion());
         }
+        // Space a line for easier visibility
+        System.out.println("");
+        // also want to test deletion of questions with parent/child relationships
+        
+        System.out.println("____Testing deleteQuestionTestCase with derived questions (parent/child)____ ");
+        
+        // create a parent and child
+        Question parent = new Question("Parent: Can we delete this?");
+        questions.addQuestion(parent);
+        Question child = questions.deriveQuestion(parent, "Child: follow-up question?");
+        
+        // attempt to delete parent (should block)
+        System.out.println("Attempting to delete parent (should fail): ");
+        questions.deleteQuestion(parent);
+        
+        // verify parent exists still
+        boolean parentExists = questions.getQuestions().contains(parent);
+        System.out.println("Parent still present? " + parentExists);
+        
+        // delete child
+        System.out.println("Deleting child question");
+        questions.deleteQuestion(child);
+        
+        // attempt to delete parent again
+        System.out.println("Attempting to delete parent again (Should succeed): ");
+        questions.deleteQuestion(parent);
+        
+        // check if parent was deleted
+        parentExists = questions.getQuestions().contains(parent);
+        System.out.println("Parent still present? " + parentExists);
     }
 
     // Edge case testing around empty lists, invalid inserts, etc
     public static void edgeCaseTesting() {
-        System.out.println("Testing edge cases...");
+        System.out.println("____Testing edge cases____ ");
 
         // Empty answers deletion (no-op)
         Question newQ = new Question("Does this handle empty answers?");
