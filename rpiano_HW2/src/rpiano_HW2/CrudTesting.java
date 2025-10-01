@@ -296,9 +296,11 @@ public class CrudTesting {
 
         // Correct answer retrieval when none exist
         Answer correct = newQ.getAnswers().getCorrectAnswer();
-        System.out.println(correct == null
-                ? "Correctly handled: No correct answer in empty set."
-                : "Unexpected: found a correct answer.");
+        if (correct == null) {
+        	System.out.println("Correctly handled: No correct answer in empty set.");
+        } else {
+        	System.out.println("Unexpected: found a correct answer.");
+        }
 
         // Adding invalid question (no '?')
         Question badQ = new Question("Invalid question.");

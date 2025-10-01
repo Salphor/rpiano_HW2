@@ -54,7 +54,7 @@ public class Questions {
     		System.out.println("***ERROR***: Question not found.");
     	}
     	
-        questions.remove(q);
+       
     }
 
     // Returns all questions in the list
@@ -106,7 +106,9 @@ public class Questions {
      */
     public List<Question> getDerivedQuestions(Question parent) {
         List<Question> children = new ArrayList<>();
-        if (parent == null) return children;
+        if (parent == null) {
+        	return children;
+        }
         for (Question q : questions) {
             if (q != null && q.getDerivedFrom() == parent) {
                 children.add(q);
