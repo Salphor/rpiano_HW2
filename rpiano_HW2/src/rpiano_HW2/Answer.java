@@ -8,6 +8,7 @@ package rpiano_HW2;
 public class Answer {
     private String answer;
     private boolean isCorrect;
+    public boolean isRead;
 
     // Constructor validates the answer before creating it
     public Answer(String a, boolean isCorrect) {
@@ -18,6 +19,7 @@ public class Answer {
         }
         this.answer = a;
         this.isCorrect = isCorrect;
+        this.isRead = false;
         System.out.println("Answer created: " + a);
     }
 
@@ -32,8 +34,12 @@ public class Answer {
     }
 
     // Marks this answer as correct
-    public void markAsCorrect() {
-        this.isCorrect = true;
+    public void markAsCorrect(boolean value) {
+        this.isCorrect = value;
+    }
+    // Mark as read
+    public void markAsRead() {
+    	this.isRead = true;
     }
 
     // Validates answer rules

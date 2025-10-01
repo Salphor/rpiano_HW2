@@ -44,4 +44,34 @@ public class Answers {
         }
         return null;
     }
+    
+    /**
+	 * Marks only one answer as correct, if another is marked correct,
+	 * will clear and set new as correct
+	 * will print error if target does not belong to question
+     */
+    
+    public void setOnlyCorrect(Answer target) {
+        if (!answers.contains(target)) {
+            System.out.println("***ERROR***: Answer not part of this question.");
+            return;
+        }
+        for (Answer a : answers) a.markAsCorrect(false);
+        target.markAsCorrect(true);
+        System.out.println("Correct/accepted answer set: " + target.getAnswer());
+    }
+
+    // Unmark any correct/accepted answer; question becomes unresolved
+    
+    public void clearCorrect() {
+        for (Answer a : answers) a.markAsCorrect(false);
+    }
+
+    // Count unread answers, for simple UI badges
+    public int getUnreadCount() {
+        int count = 0;
+        for (Answer a : answers) if (!a.isRead) count++;
+        return count;
+    }
+
 }

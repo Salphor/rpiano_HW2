@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Questions class manages a collection of Question objects.
- * It allows creating, deleting, retrieving, and searching questions.
+ * "Questions is a simple list of Question with helpers for search, filters,
+ *  and lineage (derived questions)."
+ *
+ * Note: All operations use in-memory ArrayList. 
+ * - Can swap to DB later if team likes this implementation
+ * 	 by adding question ids and a repository interface
  */
 
 public class Questions {
@@ -46,4 +50,45 @@ public class Questions {
         }
         return relatedQuestions;
     }
+    /** Return all resolved questions. O(N * M) because isResolved() scans answers. */
+    public List<Question> getResolvedQuestions() {
+        List<Question> resolved = new ArrayList<>();
+        for (Question q : questions) if (q != null && q.isResolved()) resolved.add(q);
+        return resolved;
+    }
+    /** Return all unresolved questions. O(N * M) because isResolved() scans answers. */
+    public List<Question> getUnresolvedQuestions() {
+        List<Question> unresolved = new ArrayList<>();
+        for (Question q : questions) if (q != null && !q.isResolved()) unresolved.add(q);
+        return unresolved;
+    }
+    /**
+     * Create + add a derived question from a given parent and refined text.
+     * Returns the newly added child, or null if invalid. O(1) amortized.
+     */
+    public Question deriveQuestion(Question parent, String refinedText) {
+        if (parent == null) {
+            System.out.println("***ERROR***: Parent question is null.");
+            return null;
+        }
+        Question child = new Question(refinedText, parent);
+        addQuestion(child);
+        return child;
+    }
+    /**
+     * Return all questions that were derived from the given parent. O(N).
+     * Uses reference equality (==) because we are in-memory. If you later
+     * move to a DB with IDs, compare by parentId instead.
+     */
+    public List<Question> getDerivedQuestions(Question parent) {
+        List<Question> children = new ArrayList<>();
+        if (parent == null) return children;
+        for (Question q : questions) {
+            if (q != null && q.getDerivedFrom() == parent) {
+                children.add(q);
+            }
+        }
+        return children;
+    }
+
 }
