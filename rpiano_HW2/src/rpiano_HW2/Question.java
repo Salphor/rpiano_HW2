@@ -58,9 +58,15 @@ public class Question {
     /** Alias for callers that think in "resolved" terms. O(M) */
     public Answer getResolvedAnswer() { return answers.getCorrectAnswer(); }
 
-    // Updates the text of the question (does not re-validate here)
+    // Updates the text of the question
     public void updateQuestion(String q) {
-        this.question = q;
+    	if(isValidQuestion(q)) {
+            this.question = q;
+            System.out.println("Question Updated: " + q);
+    	}
+    	else {
+            System.out.println("***Error***: Invalid question. Must end with '?' and be less than 256 characters");
+    	}
     }
 
     // Validates question rules

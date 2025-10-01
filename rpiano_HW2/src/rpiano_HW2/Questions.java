@@ -50,22 +50,24 @@ public class Questions {
         }
         return relatedQuestions;
     }
-    /** Return all resolved questions. O(N * M) because isResolved() scans answers. */
+    // Return all questions marked as Resolved
     public List<Question> getResolvedQuestions() {
         List<Question> resolved = new ArrayList<>();
         for (Question q : questions) if (q != null && q.isResolved()) resolved.add(q);
         return resolved;
     }
-    /** Return all unresolved questions. O(N * M) because isResolved() scans answers. */
+    // Return all unresolved questions
     public List<Question> getUnresolvedQuestions() {
         List<Question> unresolved = new ArrayList<>();
         for (Question q : questions) if (q != null && !q.isResolved()) unresolved.add(q);
         return unresolved;
     }
+    
     /**
      * Create + add a derived question from a given parent and refined text.
-     * Returns the newly added child, or null if invalid. O(1) amortized.
+     * Returns the newly added child, or null if invalid
      */
+    
     public Question deriveQuestion(Question parent, String refinedText) {
         if (parent == null) {
             System.out.println("***ERROR***: Parent question is null.");
@@ -76,9 +78,9 @@ public class Questions {
         return child;
     }
     /**
-     * Return all questions that were derived from the given parent. O(N).
-     * Uses reference equality (==) because we are in-memory. If you later
-     * move to a DB with IDs, compare by parentId instead.
+     * Return all questions that were derived from the given parent.
+     * Uses reference equality (==) because we are in-memory (ArrayList)
+     * 
      */
     public List<Question> getDerivedQuestions(Question parent) {
         List<Question> children = new ArrayList<>();

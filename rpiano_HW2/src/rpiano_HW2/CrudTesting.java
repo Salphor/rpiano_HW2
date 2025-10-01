@@ -34,6 +34,10 @@ public class CrudTesting {
 
         getUnreadCountTestCase();
         System.out.println("------------------------------------------");
+        
+        updateQuestionTestCase();
+        System.out.println("------------------------------------------");
+
 
         resolvedFiltersTestCase();
         System.out.println("------------------------------------------");
@@ -195,6 +199,30 @@ public class CrudTesting {
             System.out.println(" - " + q.getQuestion());
         }
     }
+    
+    // Test updating a question with valid and invalid text. 
+    public static void updateQuestionTestCase() {
+        System.out.println("Testing updateQuestionTestCase...");
+
+        // Grab the first stored question
+        Question q = questions.getQuestions().get(0);
+        System.out.println("Original: " + q.getQuestion());
+
+        // Valid update
+        q.updateQuestion("Updated: Is this working?");
+        System.out.println("After valid update: " + q.getQuestion());
+
+        // Invalid update (missing '?')
+        q.updateQuestion("This better fail validation");
+        System.out.println("After invalid update attempt: " + q.getQuestion());
+
+        // Too long (257 chars, fails validation)
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 260; i++) sb.append("x");
+        q.updateQuestion(sb.toString());
+        System.out.println("After too-long update attempt: " + q.getQuestion());
+    }
+
 
     // Delete an answer and show the remaining ones. 
     public static void deleteAnswerTestCase() {
