@@ -4,8 +4,8 @@ package rpiano_HW2;
 /**
  * CrudTesting
  *
- * Test driver that demonstrates positive/negative CRUD processes for the
- *  Questions, Question, Answers, and Answer classes. Also tests implementations
+ *  Test driver that demonstrates CRUD processes for the Questions,
+ *  Question, Answers, and Answer classes. Also tests implementations
  *  of search and derived Questions (questions based on other questions), unread counting
  *  and validation of single "correct" answer that resolved problem
  */

@@ -46,17 +46,25 @@ public class Question {
     public Answers getAnswers() {
         return answers;
     }
-    /** If this is a refined question, returns the original parent; otherwise null. */
-    public Question getDerivedFrom() { return derivedFrom; }
+    // If this is a child question, returns the original parent; otherwise null
+    public Question getDerivedFrom() {
+    	return derivedFrom; 
+    	}
 
-    /** Convenience: accept a specific Answer as the single correct answer. O(M) */
-    public void markAnswerAsCorrect(Answer a) { answers.setOnlyCorrect(a); }
+    // Convenience: accept a specific Answer as the single correct answer
+    public void markAnswerAsCorrect(Answer a) {
+    	answers.setOnlyCorrect(a);
+    	}
 
-    /** Resolved IFF a correct/accepted answer exists. O(M) */
-    public boolean isResolved() { return answers.getCorrectAnswer() != null; }
+    // Resolved IF a correct/accepted answer exists
+    public boolean isResolved() {
+    	return answers.getCorrectAnswer() != null;
+    	}
 
-    /** Alias for callers that think in "resolved" terms. O(M) */
-    public Answer getResolvedAnswer() { return answers.getCorrectAnswer(); }
+    // method of finding correct answer based on if question is Resolved
+    public Answer getResolvedAnswer() {
+    	return answers.getCorrectAnswer(); 
+    	}
 
     // Updates the text of the question
     public void updateQuestion(String q) {

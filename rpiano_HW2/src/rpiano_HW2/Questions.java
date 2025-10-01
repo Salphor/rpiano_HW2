@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * "Questions is a simple list of Question with helpers for search, filters,
- *  and lineage (derived questions)."
+ * "Questions is a simple list of Question objects with helper methods for search,
+ *  filters, and lineage (derived questions)."
  *
  * Note: All operations use in-memory ArrayList. 
  * - Can swap to DB later if team likes this implementation
