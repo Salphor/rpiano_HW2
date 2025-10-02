@@ -1,4 +1,7 @@
 # rpiano_HW2
+
+Created by: Robert Piano
+
 To access HW2 code:
 
  open rpiano_HW2 folder
@@ -13,5 +16,5 @@ To access HW2 code:
 
  open rpiano_HW2_Screencast
 
- Screencast is within
+ Screencast is within - file is too large to display in github so must be downloaded
  
